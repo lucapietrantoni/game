@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelateria Bolognese - Organizational Chaos!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍦 GELATERIA BOLOGNESE 🍦</h1>
+            <p class="subtitle">Can you survive the organizational chaos of Bologna's finest gelateria?</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="label">💰 Money:</span>
+                <span id="money" class="value">€100</span>
+            </div>
+            <div class="stat">
+                <span class="label">😊 Happiness:</span>
+                <span id="happiness" class="value">50%</span>
+            </div>
+            <div class="stat">
+                <span class="label">⭐ Reputation:</span>
+                <span id="reputation" class="value">50%</span>
+            </div>
+            <div class="stat">
+                <span class="label">📅 Day:</span>
+                <span id="day" class="value">1</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="staff-section">
+                <h2>👥 Your Staff</h2>
+                <div id="staff-list" class="staff-list"></div>
+                <button id="hire-btn" class="btn btn-primary" style="margin-top: 10px;">Hire New Staff (€30)</button>
+            </div>
+
+            <div class="scenario-section">
+                <h2>📋 Today's Challenge</h2>
+                <div id="scenario" class="scenario-card">
+                    <p class="scenario-text">Welcome to your new gelateria in Bologna! The university students are flooding in, tourists are confused about the menu, and your nonna keeps complaining the stracciatella isn't authentic enough. Let's see if you can handle this!</p>
+                </div>
+                <div id="choices" class="choices"></div>
+            </div>
+        </div>
+
+        <div id="game-over" class="game-over hidden">
+            <h2>Game Over!</h2>
+            <p id="game-over-message"></p>
+            <button id="restart-btn" class="btn btn-primary">Start New Gelateria</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
