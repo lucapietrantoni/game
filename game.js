@@ -1,230 +1,334 @@
 // Game State
 let gameState = {
-    money: 100,
+    money: 500,
     happiness: 50,
     reputation: 50,
     day: 1,
+    groupStage: 0, // 0=Forming, 1=Storming, 2=Norming, 3=Performing
     staff: [
-        { name: "Giuseppe", role: "Scooper", salary: 5, skill: "fast" },
-        { name: "Maria", role: "Cashier", salary: 5, skill: "friendly" }
+        { name: "Marco", role: "Vocalist", salary: 30, personality: "passionate" },
+        { name: "Giulia", role: "Guitarist", salary: 30, personality: "perfectionist" }
     ]
 };
 
-// Funny Italian names for staff
-const italianNames = [
-    "Luigi", "Francesca", "Marco", "Giulia", "Antonio", "Sofia",
-    "Lorenzo", "Isabella", "Matteo", "Chiara", "Alessandro", "Valentina",
-    "Giovanni", "Elena", "Davide", "Martina", "Luca", "Federica"
+// Tuckman's Stages
+const groupStages = ["Forming", "Storming", "Norming", "Performing"];
+
+// Rock/Metal names for band members
+const metalNames = [
+    "Dante", "Alessia", "Enzo", "Chiara", "Matteo", "Francesca",
+    "Lorenzo", "Sofia", "Riccardo", "Valentina", "Fabio", "Elena",
+    "Luca", "Martina", "Stefano", "Beatrice", "Diego", "Serena"
 ];
 
-// Role descriptions
+// Role descriptions with salaries
 const roles = [
-    { name: "Scooper", salary: 5, description: "Scoops gelato" },
-    { name: "Cashier", salary: 5, description: "Handles money" },
-    { name: "Gelato Maker", salary: 8, description: "Creates gelato" },
-    { name: "Manager", salary: 10, description: "Manages chaos" },
-    { name: "Social Media Influencer", salary: 7, description: "Takes photos of gelato" }
+    { name: "Vocalist", salary: 30, description: "Front person, leads the chaos" },
+    { name: "Guitarist", salary: 30, description: "Shreds riffs, breaks strings" },
+    { name: "Bassist", salary: 25, description: "Holds down the groove" },
+    { name: "Drummer", salary: 35, description: "Keeps time, loses drumsticks" },
+    { name: "Keyboardist", salary: 25, description: "Adds symphonic darkness" },
+    { name: "Manager", salary: 40, description: "Books gigs, negotiates" },
+    { name: "Sound Tech", salary: 35, description: "Makes you sound less terrible" }
 ];
 
-// Funny scenarios about organizational design
+// Scenarios based on psychological theories
 const scenarios = [
+    // FORMING STAGE - Initial team formation
     {
-        text: "A bus of 50 Japanese tourists just arrived! They all want pistachio gelato and want to take photos. You only have one scooper working the counter. What do you do?",
+        text: "🎸 FORMING STAGE: Your new band just had its first rehearsal in a basement near Via Zamboni. Nobody knows each other well. Marco wants to play thrash metal, Giulia prefers doom metal. Do you establish clear roles now or let it develop organically? (Tuckman's Group Development Theory)",
+        theory: "Tuckman's Forming Stage: Members are polite, uncertain about roles and norms. Clear structure vs. organic development trade-offs.",
         choices: [
             {
-                text: "Make everyone scoop gelato! CHAOS MODE!",
-                effect: { money: 30, happiness: -10, reputation: -5 },
-                message: "Everyone is scooping! Giuseppe accidentally scooped stracciatella into the pistachio container. The tourists loved the 'fusion flavor'! 😅"
+                text: "Autocratic Leadership: YOU decide - we're playing thrash metal, period!",
+                effect: { money: 20, happiness: -15, reputation: 5, stage: 0 },
+                message: "⚡ Strong direction! But Giulia feels unheard. (Autocratic leadership can create initial clarity but reduce buy-in)"
             },
             {
-                text: "Organize a proper queue system and rotate scoopers",
-                effect: { money: 25, happiness: 5, reputation: 10 },
-                message: "Great organizational skills! The tourists were impressed and left 5-star reviews on TripAdvisor! 🌟"
+                text: "Democratic Leadership: Hold a band meeting and vote on the style",
+                effect: { money: 0, happiness: 15, reputation: 10, stage: 1 },
+                message: "🤝 Everyone feels heard! The 3-hour debate about subgenres was exhausting but built trust. (Democratic leadership increases commitment)"
             },
             {
-                text: "Close the shop and hide in the back",
-                effect: { money: -10, happiness: -20, reputation: -15 },
-                message: "They posted angry reviews. 'Closed for no reason!' Bologna's tourism board is disappointed. 😰"
+                text: "Laissez-faire: 'Play whatever feels right, man' - no structure",
+                effect: { money: -10, happiness: -5, reputation: -10, stage: 0 },
+                message: "😵 Chaotic jam session! Sounded terrible but was... liberating? Bologna's punk scene noticed the 'experimental noise'."
             }
         ]
     },
+
+    // STORMING STAGE - Conflict emerges
     {
-        text: "Your Gelato Maker calls in sick, but you have a huge order from the University of Bologna's graduation ceremony. Three staff members want to try making gelato but none have experience!",
+        text: "⚡ STORMING STAGE: Marco and Giulia are having a massive fight about who gets center stage at your first gig at Link Bologna. Marco says vocalists always lead, Giulia says guitarists are the real stars. The gig is tomorrow! (Conflict Resolution)",
+        theory: "Tuckman's Storming Stage: Conflicts emerge as members compete for status. How you handle conflict shapes team culture.",
         choices: [
             {
-                text: "Let the most enthusiastic person try (Giuseppe the scooper)",
-                effect: { money: -5, happiness: 10, reputation: -5 },
-                message: "Giuseppe made 'experimental gelato'. Students loved the weird flavors! They called it 'avant-garde'. 🎨"
+                text: "Compete: 'Fight it out, winner takes center stage!'",
+                effect: { money: -20, happiness: -25, reputation: -15, stage: 1 },
+                message: "💥 They literally fought on stage! The crowd thought it was performance art. Local newspaper: 'Authentic aggression or just chaos?'"
             },
             {
-                text: "Cancel the order and be honest",
-                effect: { money: 0, happiness: -5, reputation: 5 },
-                message: "The university appreciated your honesty. They rescheduled and gave you a second chance. 🎓"
+                text: "Collaborate: Design staging where both shine in different songs",
+                effect: { money: 30, happiness: 20, reputation: 25, stage: 2 },
+                message: "🌟 Brilliant compromise! Dynamic stage presence! You've moved to NORMING stage. The Link crowd went wild!"
             },
             {
-                text: "Buy cheap gelato from a competitor and rebrand it",
-                effect: { money: 15, happiness: -10, reputation: -20 },
-                message: "Someone recognized the competitor's recipe! Your reputation takes a hit. The scandal is called 'Gelato-gate'. 📰"
+                text: "Avoid: Cancel the gig to 'work on band dynamics'",
+                effect: { money: -30, happiness: -10, reputation: -20, stage: 1 },
+                message: "😬 Avoidance strategy backfired. Link Bologna blacklisted you. Sometimes you need to push through conflict."
             }
         ]
     },
+
+    // NORMING STAGE - Building cohesion
     {
-        text: "Two staff members (Maria and Luigi) are arguing about who should clean the gelato machine. Meanwhile, customers are waiting and the machine is dripping everywhere!",
+        text: "🤝 NORMING STAGE: Your band is gelling! You've developed inside jokes and a shared identity. But a famous Milanese metal band wants to recruit Giulia for triple her salary. How do you strengthen team cohesion? (Social Identity Theory)",
+        theory: "Social Identity Theory: People derive identity from group membership. Strong in-group identity increases commitment.",
         choices: [
             {
-                text: "Fire both of them immediately! You'll clean it yourself!",
-                effect: { money: -20, happiness: -30, reputation: -10 },
-                message: "Bad move! Now you're understaffed AND covered in melted gelato. Your back hurts. 😫"
+                text: "Match the salary offer - throw money at the problem",
+                effect: { money: -100, happiness: 10, reputation: 0, stage: 2 },
+                message: "💸 Expensive! Now everyone wants raises. Financial motivation alone doesn't build loyalty. (Herzberg's Hygiene Factor)"
             },
             {
-                text: "Create a cleaning schedule and rotation system",
-                effect: { money: 5, happiness: 15, reputation: 5 },
-                message: "Brilliant organizational design! Everyone knows their duties now. Peace restored! ☮️"
+                text: "Emphasize shared Bologna identity: 'We're not sellouts to Milano!'",
+                effect: { money: 20, happiness: 30, reputation: 20, stage: 3 },
+                message: "🔥 Bologna pride! Social identity strengthened! Giulia stays - 'We're building something real here.' PERFORMING STAGE achieved!"
             },
             {
-                text: "Hire someone specifically for cleaning (€8/day)",
-                effect: { money: 10, happiness: 20, reputation: 0 },
-                message: "Expensive but effective! Maria and Luigi are happy. New hire Antonio is the 'Cleaning Maestro'. 🧹"
+                text: "Let her choose freely without pressure",
+                effect: { money: -50, happiness: -20, reputation: 5, stage: 1 },
+                message: "😢 She left. Respect for autonomy didn't create attachment. Sometimes you need to actively build team identity. Back to STORMING."
             }
         ]
     },
+
+    // PERFORMING STAGE - High performance
     {
-        text: "A food blogger with 100k followers wants to feature your gelateria! But she demands a 'flat organizational structure' where everyone makes decisions together. This could take hours!",
+        text: "🏆 PERFORMING STAGE: Your band is crushing it! But success brings new challenges. You've been offered a spot at Bologna's prestigious 'Zona Roveri Metal Fest' - but only if you add synth to your sound. Your purist fans might hate it. (Innovation vs. Tradition)",
+        theory: "High-performing teams can innovate or stagnate. Psychological safety enables risk-taking.",
         choices: [
             {
-                text: "Accept! Democracy in the gelateria!",
-                effect: { money: 40, happiness: -15, reputation: 25 },
-                message: "The 4-hour staff meeting about pistachio vs. nocciola was exhausting, but the blog post went viral! 📱"
+                text: "Stay pure metal - reject the synth idea completely",
+                effect: { money: -40, happiness: 5, reputation: 10, stage: 3 },
+                message: "🤘 Metal purity preserved! Hardcore fans respect the integrity. But you missed a big opportunity. Sometimes tradition limits growth."
             },
             {
-                text: "Politely decline and keep your hierarchy",
-                effect: { money: 0, happiness: 5, reputation: -5 },
-                message: "She wrote 'Old-fashioned management style' but your staff appreciated the decision-making speed. ⚡"
+                text: "Experiment with synth - create psychological safety for innovation",
+                effect: { money: 60, happiness: 15, reputation: 30, stage: 3 },
+                message: "🎹 Innovation within identity! The symphonic-metal fusion blew minds at Zona Roveri! Psychological safety breeds creativity!"
             },
             {
-                text: "Fake a flat structure just for the visit",
-                effect: { money: 35, happiness: -5, reputation: 20 },
-                message: "Your staff played along perfectly! Oscar-worthy performances! After she left, back to normal. 🎭"
+                text: "Split the band - let half go traditional, half experimental",
+                effect: { money: -80, happiness: -40, reputation: -25, stage: 1 },
+                message: "💔 Division destroyed team cohesion! Two weak bands instead of one strong one. Back to STORMING. Unity fractured."
             }
         ]
     },
+
+    // MASLOW'S HIERARCHY
     {
-        text: "Giuseppe wants to be promoted to 'Senior Scooper' (costing €2 more per day), but Maria says she deserves to be 'Head Cashier'. Your budget is tight!",
+        text: "🏠 HIERARCHY OF NEEDS: Your drummer Matteo is struggling - he's sleeping in his van because Bologna rent is insane, can barely eat, and keeps missing practice. But he's incredibly talented. (Maslow's Hierarchy of Needs)",
+        theory: "Maslow's Hierarchy: Basic physiological and safety needs must be met before higher-level motivation works.",
         choices: [
             {
-                text: "Promote both! Make everyone happy!",
-                effect: { money: -10, happiness: 25, reputation: 5 },
-                message: "Expensive but worth it! Their morale skyrocketed! They now wear fancy name tags. 🏷️"
+                text: "Give him motivational speeches about 'the dream' and 'exposure'",
+                effect: { money: 0, happiness: -30, reputation: -15, stage: -1 },
+                message: "😡 He quit! 'I can't eat exposure!' You can't motivate with self-actualization when survival needs aren't met. Critical error!"
             },
             {
-                text: "Promote neither, everyone is equal!",
-                effect: { money: 5, happiness: -20, reputation: 0 },
-                message: "They're both sulking. The gelato scoops are noticeably smaller today. 😠"
+                text: "Band fund: Cover his rent collectively until gigs pay more",
+                effect: { money: -60, happiness: 40, reputation: 15, stage: 1 },
+                message: "❤️ True solidarity! Matteo is incredibly grateful and loyal. Meeting basic needs enabled him to focus on music. Team bonds strengthened!"
             },
             {
-                text: "Create a monthly 'Employee of the Month' rotation",
-                effect: { money: 0, happiness: 15, reputation: 10 },
-                message: "Genius! Competition brings out the best in them! Customers notice the improved service! 🏆"
+                text: "Help him find a day job, adjust practice schedule",
+                effect: { money: 10, happiness: 20, reputation: 5, stage: 0 },
+                message: "⚖️ Practical solution! Less practice time but Matteo is stable and focused when present. Sometimes support means flexibility."
             }
         ]
     },
+
+    // LEADERSHIP STYLES
     {
-        text: "Peak summer! You need to hire 3 more people fast. Do you: A) Hire family members (cheap but dramatic), B) Hire students (unreliable but energetic), or C) Hire professionals (expensive but reliable)?",
+        text: "👑 LEADERSHIP CRISIS: You need to make a quick decision - a last-minute gig opportunity at Locomotiv Club (major venue!) but your bassist is sick. Do you play shorthanded, cancel, or find a replacement? The band is looking to YOU. (Leadership Under Pressure)",
+        theory: "Situational Leadership: Different situations require different leadership approaches - directive, supportive, participative, or delegative.",
         choices: [
             {
-                text: "Hire family! Nonna, Uncle Enzo, and Cousin Tina!",
-                effect: { money: 20, happiness: -25, reputation: -10 },
-                message: "Nonna keeps criticizing everyone's technique! Uncle Enzo eats all the profits! But the gelato tastes like home! 👵"
+                text: "Directive: 'I've decided - we play without bass, I'll cover on synth'",
+                effect: { money: 40, happiness: -5, reputation: 20, stage: 0 },
+                message: "⚡ Decisive action! The show went on! Sometimes teams need directive leadership in crises. Locomotiv was impressed!"
             },
             {
-                text: "Hire university students from Bologna",
-                effect: { money: 25, happiness: 10, reputation: 15 },
-                message: "They're always on their phones, but their TikToks about your gelateria are getting thousands of views! 📱"
+                text: "Participative: Emergency band meeting in 30 minutes to decide together",
+                effect: { money: -20, happiness: 15, reputation: -5, stage: 0 },
+                message: "⏰ Ran out of time deciding! Missed the slot. Participative leadership is great, but not always when time-critical. Lesson learned."
             },
             {
-                text: "Hire experienced professionals",
-                effect: { money: 15, happiness: 20, reputation: 20 },
-                message: "They're efficient and know what they're doing! Your gelateria runs like a Swiss clock! ⏰"
+                text: "Delegative: 'Giulia, you handle this - your call'",
+                effect: { money: 30, happiness: 25, reputation: 15, stage: 1 },
+                message: "🎯 Empowerment! Giulia found a fill-in bassist from her network. Delegative leadership built her confidence and showed trust!"
             }
         ]
     },
+
+    // MOTIVATION THEORY - HERZBERG
     {
-        text: "The city inspector arrives unannounced! Your organizational structure has everyone doing multiple jobs (not officially recorded). He's asking for proper job descriptions!",
+        text: "💰 MOTIVATION DILEMMA: Your sound tech wants a raise. He says 'I'm underpaid and underappreciated.' You can afford €10 more per week. But is money the real issue? (Herzberg's Two-Factor Theory)",
+        theory: "Herzberg's Theory: Hygiene factors (salary) prevent dissatisfaction. Motivators (recognition, growth) create satisfaction. Both needed!",
         choices: [
             {
-                text: "Panic and make up job descriptions on the spot",
-                effect: { money: -15, happiness: -10, reputation: -5 },
-                message: "Your nervous improvisation was obvious. 'Chief Cone Optimization Officer' raised eyebrows. 🤨"
+                text: "Give the raise and nothing else - pure financial motivation",
+                effect: { money: -15, happiness: 5, reputation: 0, stage: 0 },
+                message: "💵 Temporarily satisfied but still disconnected. Money is a hygiene factor - prevents discontent but doesn't motivate. (Herzberg)"
             },
             {
-                text: "Admit the flexible structure and explain it's more efficient",
-                effect: { money: -5, happiness: 5, reputation: 10 },
-                message: "The inspector was impressed by your honesty! He called it 'agile methodology'. You passed! ✅"
+                text: "Public recognition + small raise: 'Sound Tech Appreciation Night!'",
+                effect: { money: -10, happiness: 30, reputation: 15, stage: 1 },
+                message: "🌟 He's glowing! Recognition (motivator) + fair pay (hygiene) = true satisfaction! He's now creative and suggests sound innovations!"
             },
             {
-                text: "Bribe him with free gelato for life",
-                effect: { money: -20, happiness: 0, reputation: -15 },
-                message: "He took the gelato but still wrote you up. Now you're out gelato AND have fines. 🚫"
+                text: "Just give recognition, no raise - 'We appreciate you but we're broke'",
+                effect: { money: 0, happiness: -15, reputation: -10, stage: 0 },
+                message: "😒 'Nice words don't pay my rent.' Recognition without fair compensation feels patronizing. Need both hygiene AND motivators."
             }
         ]
     },
+
+    // GROUPTHINK
     {
-        text: "Staff burnout alert! Everyone is exhausted from the heat and customer rush. Do you implement better work-life balance or push through for profit?",
+        text: "🧠 GROUPTHINK DANGER: The band unanimously agrees your new album should be all 15-minute prog-metal epics. Everyone is hyped! But you secretly think this might be commercial suicide. Nobody wants to be 'that person' who kills the vibe. (Irving Janis - Groupthink)",
+        theory: "Groupthink: Desire for harmony leads to irrational decisions. Devil's advocates and dissent improve outcomes.",
         choices: [
             {
-                text: "Mandatory siesta time! Close from 2-4 PM daily",
-                effect: { money: -10, happiness: 30, reputation: 5 },
-                message: "Very Italian! Staff is refreshed and energetic! Tourists find it 'authentically Bologna'. 😴"
+                text: "Stay silent to maintain harmony - go with the flow",
+                effect: { money: -100, happiness: -20, reputation: -30, stage: -1 },
+                message: "💀 Album bombed! 3 people bought it (all your relatives). Groupthink suppressed critical thinking. Bologna scene mocked the 'pretentious epic failure.'"
             },
             {
-                text: "Push through! Gelato waits for no one!",
-                effect: { money: 20, happiness: -30, reputation: -5 },
-                message: "You made money but Giuseppe threw a gelato scoop at the wall. Maria is updating her resume. 💼"
+                text: "Play Devil's Advocate: 'What if we balance epics with shorter tracks?'",
+                effect: { money: 50, happiness: 10, reputation: 40, stage: 1 },
+                message: "💡 Healthy dissent! After debate, you made a balanced album that's actually good! Critical thinking prevented groupthink disaster!"
             },
             {
-                text: "Hire temporary help and rotate shifts",
-                effect: { money: 5, happiness: 15, reputation: 10 },
-                message: "Smart organizational design! Everyone gets rest, business keeps flowing! 🔄"
+                text: "Aggressively shut down the idea - 'This is stupid, trust me'",
+                effect: { money: -20, happiness: -25, reputation: 5, stage: -1 },
+                message: "😠 You were right but damaged morale. Aggressive dissent creates defensiveness. Could've framed it better. Back to STORMING."
             }
         ]
     },
+
+    // ORGANIZATIONAL CULTURE
     {
-        text: "A rival gelateria is poaching your staff with better pay! Maria got an offer for €12/day (you pay her €5). How do you respond?",
+        text: "🏢 CULTURE CLASH: You need to decide on band culture. Do you become a 'professional' band (strict schedules, contracts) or keep the 'underground family' vibe (loose, passion-driven)? Bologna's scene is watching. (Organizational Culture)",
+        theory: "Organizational Culture: Shared values, beliefs, and norms shape behavior. Culture must align with goals and identity.",
         choices: [
             {
-                text: "Match the offer! Pay Maria €12/day!",
-                effect: { money: -15, happiness: 20, reputation: 5 },
-                message: "Maria stayed! But now everyone else wants raises too. The dominoes are falling! 💰"
+                text: "Professionalize: Contracts, punctuality rules, business mindset",
+                effect: { money: 60, happiness: -15, reputation: 20, stage: 0 },
+                message: "📋 More efficient but less soul. Some say you 'sold out to corporate thinking.' Gained promoters but lost street cred among punks."
             },
             {
-                text: "Let her go and hire someone new",
-                effect: { money: -5, happiness: -15, reputation: -10 },
-                message: "Maria left and posted on Instagram about 'corporate greed'. The new hire keeps giving wrong change. 🤦"
+                text: "Stay underground: Passion over profit, flexibility, family vibe",
+                effect: { money: -20, happiness: 25, reputation: 15, stage: 1 },
+                message: "❤️‍🔥 Authentic! Bologna's underground scene embraced you. Lower income but strong identity. Culture reflects values - you chose passion!"
             },
             {
-                text: "Offer profit-sharing instead of just salary",
-                effect: { money: 10, happiness: 25, reputation: 15 },
-                message: "Revolutionary! Maria stays and everyone works harder! You invented cooperative capitalism! 🤝"
+                text: "Hybrid: 'Professional on business, family at heart'",
+                effect: { money: 40, happiness: 20, reputation: 30, stage: 1 },
+                message: "🌟 Best of both! Professional external image, authentic internal culture. Balanced approach attracted both venues and loyal fans!"
             }
         ]
     },
+
+    // ROLE THEORY - BELBIN
     {
-        text: "A customer wants to speak to the manager about 'organizational inefficiency' - they waited 3 minutes for gelato! You don't have an official manager. What now?",
+        text: "🎭 TEAM ROLES: Your band has grown to 5 people. Everyone wants to be the 'creative leader.' Nobody wants to do admin (booking, accounting). (Belbin's Team Roles Theory)",
+        theory: "Belbin's Team Roles: Effective teams need diverse roles - Shapers, Implementers, Coordinators, etc. All roles are valuable.",
         choices: [
             {
-                text: "You are the manager! Face the customer yourself!",
-                effect: { money: 0, happiness: -5, reputation: 5 },
-                message: "You handled it professionally! Customer left satisfied. But you realize you need better systems. 🎯"
+                text: "Rotate admin duties monthly - everyone does their share",
+                effect: { money: -10, happiness: -10, reputation: 0, stage: 0 },
+                message: "😓 Everyone hates it when it's their turn. Forcing people into unsuited roles reduces efficiency. Square pegs, round holes."
             },
             {
-                text: "Promote someone to manager on the spot (Giuseppe)",
-                effect: { money: -5, happiness: 15, reputation: 0 },
-                message: "Giuseppe LOVED being 'manager' for 5 minutes! He gives himself this title on LinkedIn now. 📊"
+                text: "Hire external manager to handle all non-creative work",
+                effect: { money: -50, happiness: 20, reputation: 10, stage: 1 },
+                message: "💼 Expensive but effective! Let people focus on their strengths. Sometimes specialized roles (Coordinator) need dedicated people."
             },
             {
-                text: "Explain that flat organizations are modern and efficient",
-                effect: { money: 0, happiness: 0, reputation: -10 },
-                message: "The customer looked confused and asked for a refund. They posted 'Hipster nonsense' online. 🙄"
+                text: "Identify who's actually good at admin - let them specialize",
+                effect: { money: 20, happiness: 30, reputation: 20, stage: 1 },
+                message: "🎯 Francesca turned out to be an organizational wizard! She loves it! Playing to natural strengths (Belbin roles) optimizes team performance!"
+            }
+        ]
+    },
+
+    // PSYCHOLOGICAL CONTRACT
+    {
+        text: "🤝 BROKEN PROMISES: When forming the band, you promised 'equal split of all earnings.' Now you're doing 80% of the work. Do you renegotiate or honor the original psychological contract? (Psychological Contract Theory)",
+        theory: "Psychological Contract: Unwritten expectations and beliefs about mutual obligations. Breaking them destroys trust.",
+        choices: [
+            {
+                text: "Unilaterally change splits - 'I do more, I should get more'",
+                effect: { money: 40, happiness: -40, reputation: -20, stage: -1 },
+                message: "💔 Trust shattered! Perceived breach of psychological contract. 'You changed the deal!' Two members quit. Back to FORMING with new people."
+            },
+            {
+                text: "Discuss openly: 'Let's renegotiate based on contribution'",
+                effect: { money: 20, happiness: 10, reputation: 10, stage: 0 },
+                message: "💬 Honest conversation! Harder upfront but preserved trust. New agreement feels fair to all. Psychological contracts can evolve if done transparently."
+            },
+            {
+                text: "Honor original deal despite unfairness - build resentment",
+                effect: { money: -10, happiness: -20, reputation: 5, stage: 0 },
+                message: "😤 You're quietly bitter and it shows. Unexpressed resentment poisons culture. Sometimes contracts need explicit renegotiation."
+            }
+        ]
+    },
+
+    // SOCIAL LOAFING
+    {
+        text: "😴 SOCIAL LOAFING: You notice your keyboardist Lorenzo barely practices, showing up unprepared. 'The band will carry me anyway,' he seems to think. Others are getting frustrated. (Ringelmann Effect - Social Loafing)",
+        theory: "Social Loafing: Individuals exert less effort in groups when individual contributions aren't identified. Visibility reduces loafing.",
+        choices: [
+            {
+                text: "Ignore it - confrontation is uncomfortable",
+                effect: { money: -30, happiness: -25, reputation: -15, stage: -1 },
+                message: "📉 Others started slacking too! 'If Lorenzo can coast, why not me?' Social loafing spreads. Performance tanked. Accountability matters!"
+            },
+            {
+                text: "Make individual contributions visible - record practice sessions",
+                effect: { money: 10, happiness: 15, reputation: 20, stage: 1 },
+                message: "📹 When efforts became visible, Lorenzo stepped up! Social loafing decreases when individual performance is identifiable. Smart design!"
+            },
+            {
+                text: "Publicly shame him - 'Lorenzo is dragging us down!'",
+                effect: { money: 0, happiness: -30, reputation: -10, stage: -1 },
+                message: "😡 He quit! Public shaming destroyed psychological safety. Could've addressed the behavior without attacking the person. Toxic approach."
+            }
+        ]
+    },
+
+    // ATTRIBUTION ERROR
+    {
+        text: "🎸 FUNDAMENTAL ATTRIBUTION ERROR: Giulia played terribly at your last gig. Band members say 'She's losing her edge' (dispositional). But you know her mother is seriously ill (situational). How do you handle it?",
+        theory: "Fundamental Attribution Error: We attribute others' failures to character while ignoring situational factors. Cognitive bias in judgment.",
+        choices: [
+            {
+                text: "Join the criticism - 'Yeah, Giulia needs to practice more'",
+                effect: { money: 0, happiness: -30, reputation: -5, stage: -1 },
+                message: "💔 Giulia felt abandoned when she needed support. Fundamental attribution error led to injustice. She quit: 'You never understood.'"
+            },
+            {
+                text: "Share context (with permission): Explain her situation to band",
+                effect: { money: 0, happiness: 25, reputation: 15, stage: 1 },
+                message: "❤️ Understanding! Band rallied to support her. Situational awareness prevented attribution error. Empathy strengthened bonds!"
+            },
+            {
+                text: "Replace her - 'We need reliability, whatever the reason'",
+                effect: { money: 20, happiness: -20, reputation: -25, stage: -1 },
+                message: "😢 Short-term gain, long-term loss. Lost a talented member during crisis. Bologna scene judged you as 'heartless.' Reputation damaged."
             }
         ]
     }
@@ -245,6 +349,7 @@ function updateDisplay() {
     document.getElementById('happiness').textContent = gameState.happiness + '%';
     document.getElementById('reputation').textContent = gameState.reputation + '%';
     document.getElementById('day').textContent = gameState.day;
+    document.getElementById('group-stage').textContent = groupStages[Math.max(0, Math.min(3, gameState.groupStage))];
 }
 
 function renderStaff() {
@@ -252,7 +357,7 @@ function renderStaff() {
     staffList.innerHTML = '';
 
     if (gameState.staff.length === 0) {
-        staffList.innerHTML = '<p style="color: #999;">No staff! Hire someone!</p>';
+        staffList.innerHTML = '<p style="color: #999;">No band members! Recruit someone!</p>';
         return;
     }
 
@@ -261,10 +366,10 @@ function renderStaff() {
         staffDiv.className = 'staff-member';
         staffDiv.innerHTML = `
             <div class="staff-name">${staff.name}</div>
-            <div class="staff-role">📋 ${staff.role} | 💰 €${staff.salary}/day</div>
+            <div class="staff-role">🎸 ${staff.role} | 💰 €${staff.salary}/week</div>
             <div class="staff-actions">
                 <button class="btn btn-secondary btn-small" onclick="changeRole(${index})">Change Role</button>
-                <button class="btn btn-danger btn-small" onclick="fireStaff(${index})">Fire</button>
+                <button class="btn btn-danger btn-small" onclick="fireStaff(${index})">Kick Out</button>
             </div>
         `;
         staffList.appendChild(staffDiv);
@@ -272,12 +377,12 @@ function renderStaff() {
 }
 
 function hireStaff() {
-    if (gameState.money < 30) {
-        showNotification('Not enough money to hire! Need €30', 'error');
+    if (gameState.money < 100) {
+        showNotification('Not enough cash to recruit! Need €100', 'error');
         return;
     }
 
-    const randomName = italianNames[Math.floor(Math.random() * italianNames.length)];
+    const randomName = metalNames[Math.floor(Math.random() * metalNames.length)];
     const randomRole = roles[Math.floor(Math.random() * roles.length)];
 
     gameState.staff.push({
@@ -286,9 +391,9 @@ function hireStaff() {
         salary: randomRole.salary
     });
 
-    gameState.money -= 30;
+    gameState.money -= 100;
 
-    showNotification(`Hired ${randomName} as ${randomRole.name}!`, 'success');
+    showNotification(`Recruited ${randomName} as ${randomRole.name}!`, 'success');
     updateDisplay();
     renderStaff();
 }
@@ -297,15 +402,15 @@ function fireStaff(index) {
     const staff = gameState.staff[index];
 
     if (gameState.staff.length <= 1) {
-        showNotification("You need at least one employee! Can't run a gelateria alone!", 'error');
+        showNotification("You need at least one band member! Can't be a one-person metal band!", 'error');
         return;
     }
 
     gameState.staff.splice(index, 1);
-    gameState.happiness -= 10;
-    gameState.reputation -= 5;
+    gameState.happiness -= 15;
+    gameState.reputation -= 10;
 
-    showNotification(`Fired ${staff.name}. Morale decreased. 😢`, 'warning');
+    showNotification(`Kicked out ${staff.name}. Band morale decreased. 😢`, 'warning');
     updateDisplay();
     renderStaff();
     checkGameOver();
@@ -318,7 +423,7 @@ function changeRole(index) {
     staff.role = randomRole.name;
     staff.salary = randomRole.salary;
 
-    showNotification(`${staff.name} is now a ${randomRole.name}!`, 'success');
+    showNotification(`${staff.name} is now the ${randomRole.name}!`, 'success');
     renderStaff();
 }
 
@@ -328,6 +433,9 @@ function showNewScenario() {
     document.getElementById('scenario').innerHTML = `
         <p class="scenario-text">${scenario.text}</p>
     `;
+
+    // Update theory box
+    document.getElementById('theory-text').textContent = scenario.theory;
 
     const choicesDiv = document.getElementById('choices');
     choicesDiv.innerHTML = '';
@@ -347,22 +455,28 @@ function handleChoice(choice) {
     gameState.happiness += choice.effect.happiness || 0;
     gameState.reputation += choice.effect.reputation || 0;
 
+    // Update group stage
+    if (choice.effect.stage !== undefined) {
+        gameState.groupStage += choice.effect.stage;
+    }
+
     // Clamp values
     gameState.happiness = Math.max(0, Math.min(100, gameState.happiness));
     gameState.reputation = Math.max(0, Math.min(100, gameState.reputation));
+    gameState.groupStage = Math.max(0, Math.min(3, gameState.groupStage));
 
-    // Pay staff
-    const dailySalary = gameState.staff.reduce((sum, staff) => sum + staff.salary, 0);
-    gameState.money -= dailySalary;
+    // Pay weekly salaries
+    const weeklySalary = gameState.staff.reduce((sum, staff) => sum + staff.salary, 0);
+    gameState.money -= weeklySalary;
 
     // Random events
     const randomEvent = Math.random();
-    if (randomEvent > 0.8) {
-        gameState.money += 20;
-        showNotification('🎉 Bonus! A rich tourist left a huge tip!', 'success');
+    if (randomEvent > 0.85) {
+        gameState.money += 100;
+        showNotification('🎉 Bonus! Merchandise sold out at your last gig!', 'success');
     } else if (randomEvent < 0.1) {
-        gameState.money -= 10;
-        showNotification('💸 Unexpected expense! Gelato machine repair!', 'warning');
+        gameState.money -= 50;
+        showNotification('💸 Unexpected expense! Amplifier blew up!', 'warning');
     }
 
     showNotification(choice.message, 'success');
@@ -375,25 +489,28 @@ function handleChoice(choice) {
         if (!checkGameOver()) {
             showNewScenario();
         }
-    }, 2000);
+    }, 2500);
 }
 
 function checkGameOver() {
     let gameOver = false;
     let message = '';
 
-    if (gameState.money < 0) {
+    if (gameState.money < -200) {
         gameOver = true;
-        message = `💸 BANKRUPTCY! You ran out of money on day ${gameState.day}! Your gelateria dream melted away... Maybe try a career in accounting instead?`;
+        message = `💸 BANKRUPT! You're €${Math.abs(gameState.money)} in debt on week ${gameState.day}! Your equipment was repossessed. The band dissolved in Bologna's underground scene... Time to get a day job?`;
     } else if (gameState.happiness <= 0) {
         gameOver = true;
-        message = `😭 STAFF REBELLION! Everyone quit on day ${gameState.day}! They're now working for your competitor. You're left alone, crying into a tub of stracciatella.`;
+        message = `😭 BAND BREAKUP! Everyone quit on week ${gameState.day}! Poor leadership and team dynamics destroyed morale. They formed a new band without you. Remember: organizational psychology matters!`;
     } else if (gameState.reputation <= 0) {
         gameOver = true;
-        message = `⭐ REPUTATION DESTROYED! On day ${gameState.day}, the health inspector shut you down. Bologna's newspapers called it 'The Gelato Disaster of 2026'.`;
-    } else if (gameState.day > 30 && gameState.money > 200) {
+        message = `⭐ REPUTATION DESTROYED! On week ${gameState.day}, you're permanently banned from Bologna's venues. Word spread fast. Your social identity is 'that terrible band nobody likes.' Ouch.`;
+    } else if (gameState.day > 30 && gameState.money > 500 && gameState.groupStage >= 2) {
         gameOver = true;
-        message = `🏆 VICTORY! You survived 30 days and earned €${gameState.money}! You're a true Bolognese gelato master! The city is naming a gelato flavor after you!`;
+        message = `🏆 METAL LEGENDS! You survived 30 weeks, earned €${gameState.money}, and reached ${groupStages[gameState.groupStage]} stage! Bologna's metal scene bows to your organizational psychology mastery! You understood Tuckman, motivated with Maslow, and avoided groupthink! 🤘`;
+    } else if (gameState.day > 30) {
+        gameOver = true;
+        message = `🎸 SURVIVED! You made it 30 weeks but didn't thrive. €${gameState.money} and ${groupStages[gameState.groupStage]} stage. Better understanding of organizational psychology could've helped. Try again and apply those theories!`;
     }
 
     if (gameOver) {
@@ -407,13 +524,14 @@ function checkGameOver() {
 
 function restartGame() {
     gameState = {
-        money: 100,
+        money: 500,
         happiness: 50,
         reputation: 50,
         day: 1,
+        groupStage: 0,
         staff: [
-            { name: "Giuseppe", role: "Scooper", salary: 5 },
-            { name: "Maria", role: "Cashier", salary: 5 }
+            { name: "Marco", role: "Vocalist", salary: 30 },
+            { name: "Giulia", role: "Guitarist", salary: 30 }
         ]
     };
 
@@ -433,7 +551,7 @@ function showNotification(message, type = 'success') {
     setTimeout(() => {
         notification.style.animation = 'slideIn 0.3s ease-out reverse';
         setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }, 4000);
 }
 
 // Start the game when page loads
