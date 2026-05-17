@@ -71,7 +71,12 @@
             {% if chiave == selezione %}selected{% endif %}>{{ nome }}</option>
           {% endfor %}
         </select>
-        <br>
+        <label style="font-weight: 400; margin-top: 14px; display: flex;
+          align-items: center; gap: 8px;">
+          <input type="checkbox" name="offline"
+            {% if offline %}checked{% endif %}>
+          Modalita' offline (esempio pre-generato, senza connessione ne' API key)
+        </label>
         <button type="submit">Genera modulistica</button>
       </form>
       {% if errore %}<div class="errore">{{ errore }}</div>{% endif %}
@@ -85,6 +90,13 @@
     {% if dati %}
     <div class="card">
       <h2>{{ dati.tipologia }}</h2>
+      {% if offline %}
+      <p style="display: inline-block; background: #e6f0fb; color: #1f3a5f;
+        border: 1px solid #b8cde6; padding: 4px 10px; border-radius: 4px;
+        font-size: 12px; font-weight: 600;">
+        Esempio offline pre-generato
+      </p>
+      {% endif %}
 
       {% if dati.riferimenti_modulistica %}
       <h3>Riferimenti di modulistica</h3>

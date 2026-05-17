@@ -71,6 +71,18 @@ def carica_regole(percorso_file):
         return f.read()
 
 
+def carica_esempio(chiave, cartella_esempi="esempi"):
+    """Carica un esempio pre-generato (modalita' offline) per la tipologia.
+
+    Ritorna un dizionario conforme allo schema, oppure None se non esiste.
+    """
+    percorso = os.path.join(cartella_esempi, f"{chiave}.json")
+    if not os.path.isfile(percorso):
+        return None
+    with open(percorso, encoding="utf-8") as f:
+        return json.load(f)
+
+
 def _estrai_json(testo):
     """Estrae il primo oggetto JSON valido da una stringa."""
     inizio = testo.find("{")

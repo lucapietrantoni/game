@@ -1,0 +1,110 @@
+{
+  "tipologia": "Segnalazione e presa in carico per tutela minori",
+  "riferimenti_modulistica": [
+    "Scheda di segnalazione situazione di pregiudizio per minore",
+    "Relazione sociale per l'Autorita' Giudiziaria",
+    "Verbale di colloquio",
+    "Informativa sul trattamento dei dati personali (Reg. UE 2016/679)"
+  ],
+  "checklist": [
+    {
+      "passo": "Ricezione e protocollazione della segnalazione",
+      "responsabile": "Ufficio protocollo",
+      "documenti": [
+        "Scheda di segnalazione",
+        "Eventuale documentazione allegata dal segnalante"
+      ],
+      "tempistica": "immediata",
+      "note": "Registrare fonte e data della segnalazione."
+    },
+    {
+      "passo": "Valutazione preliminare di urgenza e competenza territoriale",
+      "responsabile": "Assistente sociale / Responsabile del servizio",
+      "documenti": [],
+      "tempistica": "entro 48 ore",
+      "note": "In caso di urgenza o pericolo attivare subito le procedure previste."
+    },
+    {
+      "passo": "Apertura della cartella sociale e assegnazione del caso",
+      "responsabile": "Responsabile del servizio",
+      "documenti": ["Dati anagrafici del minore e del nucleo familiare"],
+      "tempistica": "",
+      "note": ""
+    },
+    {
+      "passo": "Primo colloquio con la famiglia e/o con il minore",
+      "responsabile": "Assistente sociale",
+      "documenti": ["Verbale di colloquio"],
+      "tempistica": "entro 15 giorni in assenza di urgenza",
+      "note": ""
+    },
+    {
+      "passo": "Valutazione multidimensionale della situazione",
+      "responsabile": "Equipe multidisciplinare",
+      "documenti": ["Informazioni dai servizi gia' coinvolti (scuola, ASST)"],
+      "tempistica": "",
+      "note": "Trattare i dati del minore con la massima riservatezza."
+    },
+    {
+      "passo": "Definizione del progetto di intervento",
+      "responsabile": "Assistente sociale",
+      "documenti": [],
+      "tempistica": "",
+      "note": ""
+    },
+    {
+      "passo": "Eventuale relazione e invio all'Autorita' Giudiziaria",
+      "responsabile": "Assistente sociale / Responsabile del servizio",
+      "documenti": ["Relazione sociale per l'Autorita' Giudiziaria"],
+      "tempistica": "secondo i termini richiesti",
+      "note": ""
+    }
+  ],
+  "modulo": {
+    "titolo": "Scheda di segnalazione - situazione di pregiudizio per minore",
+    "intestazione": [
+      "Ambito Territoriale ___________________",
+      "Servizio Tutela Minori"
+    ],
+    "sezioni": [
+      {
+        "nome": "Dati del minore",
+        "campi": [
+          "Cognome e nome del minore",
+          "Luogo e data di nascita",
+          "Codice fiscale",
+          "Indirizzo di residenza",
+          "Scuola / servizio frequentato"
+        ]
+      },
+      {
+        "nome": "Nucleo familiare",
+        "campi": [
+          "Composizione del nucleo familiare",
+          "Esercenti la responsabilita' genitoriale",
+          "Provvedimenti dell'Autorita' Giudiziaria gia' presenti"
+        ]
+      },
+      {
+        "nome": "Dati della segnalazione",
+        "campi": [
+          "Soggetto segnalante",
+          "Data e modalita' della segnalazione",
+          "Descrizione sintetica della situazione rilevata"
+        ]
+      },
+      {
+        "nome": "Valutazione preliminare",
+        "campi": [
+          "Livello di urgenza rilevato",
+          "Servizi e figure professionali gia' coinvolti",
+          "Proposta di primo intervento"
+        ]
+      }
+    ],
+    "dichiarazioni": [
+      "I dati relativi al minore sono trattati nel rispetto del principio di minimizzazione e riservatezza."
+    ],
+    "firme": ["L'Assistente sociale", "Il Responsabile del servizio"]
+  }
+}
