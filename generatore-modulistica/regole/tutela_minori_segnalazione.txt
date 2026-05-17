@@ -1,0 +1,46 @@
+TIPOLOGIA: Segnalazione e presa in carico per tutela minori
+NATURA DEL DOCUMENTO: REGOLE FITTIZIE A SCOPO DIDATTICO E DIMOSTRATIVO
+Questo file NON contiene normativa ufficiale. Serve solo come esempio per la
+formazione. Lo stile richiama la modulistica dei Servizi Sociali degli Ambiti
+Territoriali della Regione Lombardia, ma i contenuti sono inventati.
+
+RIFERIMENTI DI MODULISTICA (stile Regione Lombardia - esempio non ufficiale)
+- Scheda di segnalazione situazione di pregiudizio per minore
+- Relazione sociale per l'Autorita' Giudiziaria
+- Verbale di colloquio
+- Informativa sul trattamento dei dati personali (Reg. UE 2016/679)
+
+DOCUMENTI E INFORMAZIONI DA ACQUISIRE
+- Dati anagrafici del minore e del nucleo familiare
+- Soggetto segnalante e modalita' della segnalazione
+- Descrizione della situazione rilevata
+- Eventuali provvedimenti dell'Autorita' Giudiziaria gia' presenti
+- Servizi e figure professionali gia' coinvolti (scuola, ASST, ecc.)
+
+PASSAGGI DELLA PROCEDURA (a cura dell'ufficio)
+1. Ricezione e protocollazione della segnalazione
+2. Valutazione preliminare di urgenza e competenza territoriale
+3. Apertura della cartella sociale e assegnazione all'assistente sociale
+4. Primo colloquio con la famiglia e/o con il minore
+5. Valutazione multidimensionale della situazione
+6. Definizione del progetto di intervento
+7. Eventuale relazione e invio all'Autorita' Giudiziaria competente
+
+TEMPISTICHE INDICATIVE
+- Valutazione preliminare di urgenza: entro 48 ore dalla segnalazione
+- Primo colloquio: entro 15 giorni in assenza di urgenza
+- Relazione all'Autorita' Giudiziaria: secondo i termini richiesti
+
+CAMPI DA PREVEDERE NEL MODULO
+- Dati del minore e del nucleo familiare
+- Fonte e data della segnalazione
+- Descrizione sintetica della situazione
+- Valutazione del livello di urgenza
+- Servizi coinvolti e rete territoriale
+- Proposta di intervento
+- Data, luogo e firma dell'assistente sociale
+
+NOTE
+- I dati relativi a minori sono particolarmente sensibili: trattare con la
+  massima riservatezza e secondo il principio di minimizzazione.
+- In caso di urgenza o pericolo attivare immediatamente le procedure previste.

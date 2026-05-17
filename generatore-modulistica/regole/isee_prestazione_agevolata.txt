@@ -1,0 +1,42 @@
+TIPOLOGIA: Accesso a prestazione sociale agevolata (ISEE)
+NATURA DEL DOCUMENTO: REGOLE FITTIZIE A SCOPO DIDATTICO E DIMOSTRATIVO
+Questo file NON contiene normativa ufficiale. Serve solo come esempio per la
+formazione. Lo stile richiama la modulistica dei Servizi Sociali degli Ambiti
+Territoriali della Regione Lombardia, ma i contenuti sono inventati.
+
+RIFERIMENTI DI MODULISTICA (stile Regione Lombardia - esempio non ufficiale)
+- Domanda di accesso a prestazione sociale agevolata
+- Attestazione ISEE / Dichiarazione Sostitutiva Unica (DSU)
+- Informativa sul trattamento dei dati personali (Reg. UE 2016/679)
+
+DOCUMENTI RICHIESTI ALL'ASSISTITO
+- Documento d'identità in corso di validita'
+- Codice fiscale / tessera sanitaria
+- Attestazione ISEE in corso di validita' (ordinario o corrente)
+- Permesso di soggiorno in corso di validita' (per cittadini extra UE)
+- Eventuale documentazione reddituale integrativa
+- IBAN per accredito prestazione
+
+PASSAGGI DELLA PROCEDURA (a cura dell'ufficio)
+1. Ricevimento e protocollazione della domanda
+2. Verifica della completezza documentale
+3. Verifica della validita' dell'attestazione ISEE
+4. Istruttoria e valutazione dei requisiti di accesso
+5. Predisposizione dell'esito (accoglimento / diniego)
+6. Comunicazione dell'esito al richiedente
+
+TEMPISTICHE INDICATIVE
+- Conclusione istruttoria: entro 30 giorni dalla protocollazione
+- Integrazione documentale richiesta all'utente: entro 10 giorni
+
+CAMPI DA PREVEDERE NEL MODULO
+- Dati anagrafici del richiedente
+- Composizione del nucleo familiare
+- Valore ISEE e periodo di validita'
+- Prestazione richiesta
+- Dichiarazioni del richiedente
+- Data, luogo e firma
+
+NOTE
+- In assenza di ISEE valido la domanda non e' procedibile.
+- Verificare sempre la residenza nell'Ambito Territoriale di competenza.
