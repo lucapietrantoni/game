@@ -1,0 +1,106 @@
+{
+  "tipologia": "Contributo economico straordinario",
+  "riferimenti_modulistica": [
+    "Domanda di contributo economico straordinario",
+    "Relazione sociale a supporto dell'istanza",
+    "Attestazione ISEE / Dichiarazione Sostitutiva Unica (DSU)",
+    "Informativa sul trattamento dei dati personali (Reg. UE 2016/679)"
+  ],
+  "checklist": [
+    {
+      "passo": "Ricevimento e protocollazione della domanda",
+      "responsabile": "Ufficio protocollo",
+      "documenti": [
+        "Domanda di contributo compilata e firmata",
+        "Documento d'identita' in corso di validita'",
+        "Codice fiscale / tessera sanitaria"
+      ],
+      "tempistica": "1 giorno lavorativo",
+      "note": ""
+    },
+    {
+      "passo": "Verifica della completezza documentale",
+      "responsabile": "Assistente sociale",
+      "documenti": [
+        "Attestazione ISEE in corso di validita'",
+        "Documentazione della spesa o del bisogno straordinario",
+        "Documentazione delle entrate del nucleo familiare",
+        "IBAN per accredito del contributo"
+      ],
+      "tempistica": "entro 5 giorni",
+      "note": "Richiedere integrazione in caso di documenti mancanti."
+    },
+    {
+      "passo": "Colloquio sociale e valutazione del bisogno",
+      "responsabile": "Assistente sociale",
+      "documenti": [],
+      "tempistica": "entro 15 giorni dalla domanda",
+      "note": ""
+    },
+    {
+      "passo": "Redazione della relazione sociale",
+      "responsabile": "Assistente sociale",
+      "documenti": ["Relazione sociale a supporto dell'istanza"],
+      "tempistica": "",
+      "note": "Motivare sempre la valutazione del bisogno."
+    },
+    {
+      "passo": "Valutazione in equipe e proposta di erogazione",
+      "responsabile": "Equipe del servizio",
+      "documenti": [],
+      "tempistica": "",
+      "note": "Il contributo straordinario ha carattere non continuativo."
+    },
+    {
+      "passo": "Adozione del provvedimento e comunicazione all'utente",
+      "responsabile": "Responsabile del servizio",
+      "documenti": [],
+      "tempistica": "entro 30 giorni dalla protocollazione",
+      "note": ""
+    }
+  ],
+  "modulo": {
+    "titolo": "Domanda di contributo economico straordinario",
+    "intestazione": [
+      "Ambito Territoriale ___________________",
+      "Servizio Sociale professionale"
+    ],
+    "sezioni": [
+      {
+        "nome": "Dati anagrafici del richiedente",
+        "campi": [
+          "Cognome e nome",
+          "Luogo e data di nascita",
+          "Codice fiscale",
+          "Indirizzo di residenza",
+          "Recapito telefonico"
+        ]
+      },
+      {
+        "nome": "Nucleo familiare",
+        "campi": [
+          "Composizione del nucleo familiare",
+          "Situazione economica del nucleo",
+          "Valore ISEE"
+        ]
+      },
+      {
+        "nome": "Bisogno straordinario",
+        "campi": [
+          "Descrizione del bisogno straordinario",
+          "Importo richiesto",
+          "Finalita' del contributo"
+        ]
+      },
+      {
+        "nome": "Valutazione dell'assistente sociale",
+        "campi": ["Valutazione del bisogno", "Proposta di erogazione"]
+      }
+    ],
+    "dichiarazioni": [
+      "Dichiara di aver preso visione dell'informativa sul trattamento dei dati personali.",
+      "Dichiara che quanto riportato corrisponde al vero ai sensi del DPR 445/2000."
+    ],
+    "firme": ["Il/La richiedente", "L'Assistente sociale"]
+  }
+}

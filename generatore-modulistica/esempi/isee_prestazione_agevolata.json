@@ -1,0 +1,108 @@
+{
+  "tipologia": "Accesso a prestazione sociale agevolata (ISEE)",
+  "riferimenti_modulistica": [
+    "Domanda di accesso a prestazione sociale agevolata",
+    "Attestazione ISEE / Dichiarazione Sostitutiva Unica (DSU)",
+    "Informativa sul trattamento dei dati personali (Reg. UE 2016/679)"
+  ],
+  "checklist": [
+    {
+      "passo": "Ricevimento e protocollazione della domanda",
+      "responsabile": "Ufficio protocollo",
+      "documenti": [
+        "Domanda di accesso compilata e firmata",
+        "Documento d'identita' in corso di validita'",
+        "Codice fiscale / tessera sanitaria"
+      ],
+      "tempistica": "1 giorno lavorativo",
+      "note": "Verificare la residenza nell'Ambito Territoriale di competenza."
+    },
+    {
+      "passo": "Verifica della completezza documentale",
+      "responsabile": "Assistente sociale",
+      "documenti": [
+        "Attestazione ISEE in corso di validita'",
+        "Permesso di soggiorno (cittadini extra UE)",
+        "IBAN per accredito prestazione"
+      ],
+      "tempistica": "entro 5 giorni",
+      "note": "In caso di documenti mancanti richiedere integrazione all'utente."
+    },
+    {
+      "passo": "Verifica della validita' dell'attestazione ISEE",
+      "responsabile": "Assistente sociale",
+      "documenti": ["Attestazione ISEE ordinario o corrente"],
+      "tempistica": "",
+      "note": "In assenza di ISEE valido la domanda non e' procedibile."
+    },
+    {
+      "passo": "Istruttoria e valutazione dei requisiti di accesso",
+      "responsabile": "Assistente sociale",
+      "documenti": ["Eventuale documentazione reddituale integrativa"],
+      "tempistica": "",
+      "note": ""
+    },
+    {
+      "passo": "Predisposizione dell'esito (accoglimento o diniego)",
+      "responsabile": "Responsabile del servizio",
+      "documenti": [],
+      "tempistica": "",
+      "note": ""
+    },
+    {
+      "passo": "Comunicazione dell'esito al richiedente",
+      "responsabile": "Ufficio protocollo",
+      "documenti": [],
+      "tempistica": "entro 30 giorni dalla protocollazione",
+      "note": "Integrazione documentale eventualmente richiesta entro 10 giorni."
+    }
+  ],
+  "modulo": {
+    "titolo": "Domanda di accesso a prestazione sociale agevolata",
+    "intestazione": [
+      "Ambito Territoriale ___________________",
+      "Servizio Sociale professionale"
+    ],
+    "sezioni": [
+      {
+        "nome": "Dati anagrafici del richiedente",
+        "campi": [
+          "Cognome e nome",
+          "Luogo e data di nascita",
+          "Codice fiscale",
+          "Indirizzo di residenza",
+          "Recapito telefonico",
+          "Indirizzo e-mail"
+        ]
+      },
+      {
+        "nome": "Composizione del nucleo familiare",
+        "campi": [
+          "Numero componenti del nucleo",
+          "Cognome e nome dei componenti",
+          "Eventuali condizioni di fragilita' nel nucleo"
+        ]
+      },
+      {
+        "nome": "Situazione economica",
+        "campi": [
+          "Valore ISEE",
+          "Periodo di validita' dell'ISEE",
+          "IBAN per accredito"
+        ]
+      },
+      {
+        "nome": "Prestazione richiesta",
+        "campi": [
+          "Tipologia di prestazione richiesta",
+          "Motivazione della richiesta"
+        ]
+      }
+    ],
+    "dichiarazioni": [
+      "Dichiara di aver preso visione dell'informativa sul trattamento dei dati personali.",
+      "Dichiara che le informazioni fornite corrispondono al vero ai sensi del DPR 445/2000."
+    ],
+    "firme": ["Il/La richiedente", "L'Assistente sociale ricevente"]
+  }
+}

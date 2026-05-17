@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generatore di checklist e modulistica - Servizi Sociali</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Calibri, Arial, sans-serif;
+      margin: 0; background: #eef1f4; color: #1f2a37;
+    }
+    header {
+      background: #1f3a5f; color: #fff; padding: 20px 32px;
+    }
+    header h1 { margin: 0; font-size: 20px; }
+    header p { margin: 4px 0 0; font-size: 13px; color: #c7d4e3; }
+    main { max-width: 860px; margin: 24px auto; padding: 0 16px; }
+    .card {
+      background: #fff; border: 1px solid #d9dee4; border-radius: 8px;
+      padding: 22px 26px; margin-bottom: 20px;
+    }
+    label { font-weight: 600; display: block; margin-bottom: 8px; }
+    select, button {
+      font-size: 15px; padding: 10px 12px; border-radius: 6px;
+      border: 1px solid #b8c0cc;
+    }
+    select { width: 100%; max-width: 460px; }
+    button {
+      background: #1f3a5f; color: #fff; border: none; cursor: pointer;
+      margin-top: 14px; font-weight: 600;
+    }
+    button:hover { background: #2c5183; }
+    .avviso {
+      background: #fff7e6; border: 1px solid #f0d9a8; color: #6b5418;
+      font-size: 13px; padding: 10px 14px; border-radius: 6px; margin-top: 14px;
+    }
+    .errore {
+      background: #fdecec; border: 1px solid #f3b9b9; color: #8a2020;
+      padding: 10px 14px; border-radius: 6px; margin-top: 14px;
+    }
+    h2 { font-size: 17px; border-bottom: 2px solid #1f3a5f; padding-bottom: 6px; }
+    h3 { font-size: 14px; color: #1f3a5f; margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid #d9dee4; padding: 7px 9px; text-align: left;
+      vertical-align: top; }
+    th { background: #f0f3f7; }
+    .download {
+      display: inline-block; background: #1f7a44; color: #fff;
+      text-decoration: none; padding: 11px 18px; border-radius: 6px;
+      font-weight: 600; margin-top: 8px;
+    }
+    .download:hover { background: #259252; }
+    ul { margin: 6px 0; padding-left: 20px; }
+    .sezione-modulo { margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Generatore di checklist e modulistica</h1>
+    <p>Servizio Sociale professionale &middot; strumento dimostrativo per la formazione</p>
+  </header>
+  <main>
+    <div class="card">
+      <form method="post" action="/genera">
+        <label for="tipologia">Tipologia di pratica</label>
+        <select id="tipologia" name="tipologia">
+          <option value="">-- Seleziona una tipologia --</option>
+          {% for chiave, nome in tipologie.items() %}
+          <option value="{{ chiave }}"
+            {% if chiave == selezione %}selected{% endif %}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+        <label style="font-weight: 400; margin-top: 14px; display: flex;
+          align-items: center; gap: 8px;">
+          <input type="checkbox" name="offline"
+            {% if offline %}checked{% endif %}>
+          Modalita' offline (esempio pre-generato, senza connessione ne' API key)
+        </label>
+        <button type="submit">Genera modulistica</button>
+      </form>
+      {% if errore %}<div class="errore">{{ errore }}</div>{% endif %}
+      <div class="avviso">
+        Strumento a scopo formativo. Le regole d'ufficio caricate sono
+        <strong>fittizie</strong>. Non inserire dati personali reali: gli output
+        sono bozze da verificare e firmare a cura dell'operatore.
+      </div>
+    </div>
+
+    {% if dati %}
+    <div class="card">
+      <h2>{{ dati.tipologia }}</h2>
+      {% if offline %}
+      <p style="display: inline-block; background: #e6f0fb; color: #1f3a5f;
+        border: 1px solid #b8cde6; padding: 4px 10px; border-radius: 4px;
+        font-size: 12px; font-weight: 600;">
+        Esempio offline pre-generato
+      </p>
+      {% endif %}
+
+      {% if dati.riferimenti_modulistica %}
+      <h3>Riferimenti di modulistica</h3>
+      <ul>
+        {% for rif in dati.riferimenti_modulistica %}<li>{{ rif }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if dati.checklist %}
+      <h3>Checklist operativa</h3>
+      <table>
+        <tr>
+          <th>Passo</th><th>Responsabile</th><th>Documenti</th><th>Tempi / Note</th>
+        </tr>
+        {% for voce in dati.checklist %}
+        <tr>
+          <td>{{ voce.passo }}</td>
+          <td>{{ voce.responsabile }}</td>
+          <td>
+            <ul>{% for d in voce.documenti %}<li>{{ d }}</li>{% endfor %}</ul>
+          </td>
+          <td>
+            {% if voce.tempistica %}{{ voce.tempistica }}<br>{% endif %}
+            {{ voce.note }}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+
+      {% if dati.modulo and dati.modulo.sezioni %}
+      <h3>Modulo: {{ dati.modulo.titolo }}</h3>
+      {% for sezione in dati.modulo.sezioni %}
+      <div class="sezione-modulo">
+        <strong>{{ sezione.nome }}</strong>
+        <ul>{% for campo in sezione.campi %}<li>{{ campo }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <a class="download" href="/download/{{ nome_file }}">
+        Scarica il documento Word (.docx)
+      </a>
+    </div>
+    {% endif %}
+  </main>
+</body>
+</html>

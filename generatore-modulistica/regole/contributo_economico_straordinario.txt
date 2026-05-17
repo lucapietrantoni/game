@@ -1,0 +1,43 @@
+TIPOLOGIA: Contributo economico straordinario
+NATURA DEL DOCUMENTO: REGOLE FITTIZIE A SCOPO DIDATTICO E DIMOSTRATIVO
+Questo file NON contiene normativa ufficiale. Serve solo come esempio per la
+formazione. Lo stile richiama la modulistica dei Servizi Sociali degli Ambiti
+Territoriali della Regione Lombardia, ma i contenuti sono inventati.
+
+RIFERIMENTI DI MODULISTICA (stile Regione Lombardia - esempio non ufficiale)
+- Domanda di contributo economico straordinario
+- Relazione sociale a supporto dell'istanza
+- Attestazione ISEE / Dichiarazione Sostitutiva Unica (DSU)
+- Informativa sul trattamento dei dati personali (Reg. UE 2016/679)
+
+DOCUMENTI RICHIESTI ALL'ASSISTITO
+- Documento d'identita' in corso di validita'
+- Codice fiscale / tessera sanitaria
+- Attestazione ISEE in corso di validita'
+- Documentazione della spesa o del bisogno straordinario
+- Documentazione delle entrate del nucleo familiare
+- IBAN per accredito del contributo
+
+PASSAGGI DELLA PROCEDURA (a cura dell'ufficio)
+1. Ricevimento e protocollazione della domanda
+2. Verifica della completezza documentale
+3. Colloquio sociale e valutazione del bisogno
+4. Redazione della relazione sociale
+5. Valutazione in equipe / proposta di erogazione
+6. Adozione del provvedimento e comunicazione all'utente
+
+TEMPISTICHE INDICATIVE
+- Colloquio sociale: entro 15 giorni dalla domanda
+- Conclusione istruttoria: entro 30 giorni dalla protocollazione
+
+CAMPI DA PREVEDERE NEL MODULO
+- Dati anagrafici del richiedente e del nucleo familiare
+- Descrizione del bisogno straordinario
+- Situazione economica del nucleo
+- Importo richiesto e finalita'
+- Valutazione dell'assistente sociale
+- Data, luogo e firma
+
+NOTE
+- Il contributo straordinario ha carattere non continuativo.
+- Motivare sempre la valutazione del bisogno nella relazione sociale.
